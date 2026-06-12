@@ -1,7 +1,6 @@
 # 🇻🇳 AIDEOM-VN — Mô hình ra quyết định: Kinh tế Việt Nam trong kỉ nguyên AI
 
-Web app **Streamlit** tương tác giải trọn bộ **12 bài tập** của đề "Bộ bài tập thực hành Mô hình
-ra quyết định — Phát triển kinh tế Việt Nam trong kỉ nguyên AI" (UEB — Viện QTKD), dùng dữ liệu
+Bộ bài tập thực hành Mô hình ra quyết định — Phát triển kinh tế Việt Nam trong kỉ nguyên AI" (UEB — Viện QTKD), dùng dữ liệu
 Việt Nam 2020–2025.
 
 **Tính năng cốt lõi:** mọi bảng số liệu (macro, ngành, vùng, hệ số β, danh mục dự án, kịch bản…)
