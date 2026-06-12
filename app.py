@@ -620,18 +620,6 @@ def page_b1(macro, *_):
     tfp_trend = "tăng" if A[-1] > A[0] else "giảm"
     top_new = dec[dec["Yếu tố"].isin(["D", "AI", "H"])].sort_values(
         "Tỷ trọng (%)", ascending=False).iloc[0]
-    policy_box([
-        ("a) Xu hướng TFP?",
-         f"Với hệ số hiện tại, A_t **{tfp_trend}** từ {A[0]:.3f} (2020) lên {A[-1]:.3f} (2025) — "
-         "TFP tăng cho thấy tăng trưởng không chỉ dựa vào bơm vốn mà còn nhờ hiệu quả, phù hợp "
-         "định hướng tăng trưởng dựa trên KH-CN của Nghị quyết 57-NQ/TW."),
-        ("b) Yếu tố mới nào đóng góp nhiều nhất?",
-         f"Theo phân rã hiện tại: **{top_new['Yếu tố']}** ({top_new['Tỷ trọng (%)']:.1f}%). "
-         "D tăng nhanh nhất về tốc độ (12% → 19,5% GDP) nên thường dẫn đầu nhóm yếu tố mới."),
-        ("c) Mục tiêu 30% kinh tế số/GDP vào 2030 có khả thi?",
-         "Cần D tăng ~9 điểm %/5 năm, nhanh hơn 2020-25 (7,5 điểm). Khả thi nếu duy trì đầu tư H "
-         "và hạ tầng đi kèm; ràng buộc chính là nhân lực số và thể chế dữ liệu, không phải công nghệ."),
-    ])
 
 
 def page_b2(*_):
@@ -696,19 +684,6 @@ def page_b2(*_):
     if x3min_alt:
         st.success(f"2.4.4: với x3 ≥ 30, bài toán **vẫn khả thi**; Z* = {-res.fun:,.2f} "
                    "(giảm so với gốc vì phải chuyển 10 nghìn tỷ từ R&D hệ số 1,35 sang nhân lực 0,95).")
-    policy_box([
-        ("a) +1 đồng ngân sách → GDP?",
-         f"Theo shadow price của ràng buộc ngân sách: ≈ **{sp_budget:.2f} đồng GDP/đồng vốn**. "
-         "Là cận trên khi hệ số tác động chính xác và không có độ trễ giải ngân."),
-        ("b) Vì sao R&D hệ số cao nhất nhưng sàn thấp nhất?",
-         "Sàn phản ánh năng lực hấp thụ và cam kết tối thiểu, không phải hiệu quả; R&D rủi ro cao, "
-         "độ trễ dài nên nhà nước chỉ cam kết sàn thận trọng — phần còn lại để mô hình tối ưu quyết, "
-         "và mô hình đúng là dồn tối đa phần dư vào R&D."),
-        ("c) Tỷ lệ 35% công nghệ chiến lược có khả thi thực tiễn?",
-         "Khó trong ngắn hạn khi NSNN ưu tiên hạ tầng giao thông và an sinh; khả thi hơn nếu tính "
-         "cả vốn đối ứng tư nhân/FDI vào mẫu số theo cơ chế hợp tác công-tư của Nghị quyết 57."),
-    ])
-
 
 def page_b3(_, sectors, __):
     st.header("Bài 3 — Chỉ số ưu tiên ngành Priority_i")
@@ -770,20 +745,7 @@ def page_b3(_, sectors, __):
         "Định hướng tăng trưởng (top-3)": df["sector_name_vi"].iloc[np.argsort(-pg)[:3]].values,
         "Định hướng bao trùm (top-3)": df["sector_name_vi"].iloc[np.argsort(-pi_)[:3]].values})
     st.dataframe(cmp, hide_index=True)
-    policy_box([
-        ("a) Ba ngành ưu tiên & Nghị quyết 57?",
-         f"Top-3 hiện tại ({', '.join(rank['sector_name_vi'].head(3))}) nhất quán với NQ 57-NQ/TW: "
-         "ưu tiên ngành lan tỏa cao và sẵn sàng AI cao để tạo hiệu ứng kéo toàn nền kinh tế."),
-        ("b) Vì sao Khai khoáng năng suất cao mà không được ưu tiên?",
-         "Năng suất cao do thâm dụng tài nguyên/vốn; nhưng tăng trưởng âm (-1,2%), lan tỏa 0,30 "
-         "thấp, rủi ro tự động hóa 55% cao nhất — chỉ số tổng hợp phạt nặng cả ba chiều."),
-        ("c) Ai quyết định trọng số?",
-         "Quy trình lai: chuyên gia đề xuất khung → hội đồng chính sách quyết → tham vấn công khai. "
-         "Trọng số là lựa chọn giá trị, không phải đại lượng kỹ thuật; tính chính danh của kết quả "
-         "phụ thuộc tính chính danh của trọng số."),
-    ])
-
-
+  
 def page_b4(*_):
     st.header("Bài 4 — LP phân bổ 50 nghìn tỷ theo vùng × hạng mục")
     beta = st.data_editor(BETA_B4_DEFAULT, key="b4_beta", use_container_width=True)
@@ -830,18 +792,7 @@ def page_b4(*_):
                               title="Chênh lệch phân bổ (không C5 − có C5)"),
                     use_container_width=True)
     flow_to = REGION_SHORT[int(np.argmax(sol_n.sum(1)))]
-    policy_box([
-        ("a) Bỏ ràng buộc công bằng, vốn chảy về đâu?",
-         f"Về vùng có hệ số biên cao nhất — hiện là **{flow_to}** (ĐNB/ĐBSH với β_AI 1,40-1,55). "
-         "Hậu quả dài hạn: khoét sâu khoảng cách số, di cư lao động, bất ổn xã hội vùng tụt hậu."),
-        ("b) Trần C3 — 'chính sách phân quyền' — làm giảm Z* bao nhiêu, chấp nhận được không?",
-         f"Chi phí công bằng hiện tại ≈ **{cost/max(Zn,1)*100:.1f}%** GDP gain — mức 'phí bảo hiểm "
-         "gắn kết xã hội' thường được coi là chấp nhận được nếu dưới ~5%."),
-        ("c) Tây Nguyên: AI hay H+I trước?",
-         "Mô hình trả lời rõ: với β_AI=0,45 thấp nhất, lời giải dồn ngân sách Tây Nguyên vào "
-         "H (1,35) và I (1,20) — đào tạo và hạ tầng đi trước, AI đến sau khi nền tảng đủ."),
-    ])
-
+ 
 
 def page_b5(*_):
     st.header("Bài 5 — MIP lựa chọn 15 dự án chuyển đổi số")
@@ -880,20 +831,7 @@ def page_b5(*_):
     st.caption("5.4.2: kéo ngân sách lên 100.000 để thấy tập dự án mở rộng "
                "(thường thêm cụm P8+P13 nhờ thỏa precedence với P12).")
     p15 = "được chọn" if 14 in sel else "bị loại"
-    policy_box([
-        ("a) Vì sao P15 (Open Data) tỷ suất cao mà có thể bị loại?",
-         f"Hiện P15 {p15}. Khi trần ngân sách năm 1-2 hoặc trần số dự án bó chặt, MIP ưu tiên dự án "
-         "*tổng lợi ích tuyệt đối* lớn; dự án nhỏ tỷ suất cao có thể bị chèn — tính chất knapsack, "
-         "không hẳn là kết quả mong muốn vì ngoại ứng dữ liệu mở chưa được định giá trong B_i."),
-        ("b) Bắt buộc P14 có làm giảm Z*?",
-         "Chỉ giảm nếu P14 không nằm trong lời giải tự do; với tham số gốc P14 thường được chọn sẵn "
-         "(B/C = 1,97) nên ràng buộc gần như miễn phí — và hợp lý vì an ninh mạng là hàng hóa công "
-         "không thể đánh đổi."),
-        ("c) Mô hình hóa cộng hưởng P8-P13?",
-         "Thêm biến nhị phân z với linear hóa z ≤ y8, z ≤ y13, z ≥ y8 + y13 − 1, rồi cộng "
-         "B_synergy·z vào hàm mục tiêu."),
-    ])
-
+  
 
 def page_b6(_, __, regions):
     st.header("Bài 6 — TOPSIS xếp hạng 6 vùng cho đầu tư AI")
@@ -953,21 +891,7 @@ def page_b6(_, __, regions):
                "entropy làm phương án trọng số khách quan đối chứng — AHP đầy đủ để trong notebook.")
     top1 = out.sort_values("Hạng CG")["Vùng"].iloc[0]
     biggest_shift = int((out["Hạng CG"] - out["Hạng Ent"]).abs().idxmax())
-    policy_box([
-        ("a) Vùng dẫn đầu — nơi đặt trung tâm AI quốc gia đầu tiên?",
-         f"**{top1}** dẫn đầu với trọng số chuyên gia — ứng viên tự nhiên cho trung tâm AI đầu "
-         "tiên; quyết định cuối nên cân thêm chi phí đất, điện và liên kết đại học."),
-        ("b) Vùng đổi hạng mạnh nhất khi dùng entropy?",
-         f"**{out.loc[biggest_shift, 'Vùng']}** — entropy thưởng tiêu chí có độ phân tán lớn "
-         "(FDI, R&D) nên vùng cực đoan ở các tiêu chí này dịch chuyển nhiều nhất."),
-        ("c) Đa cộng tuyến AI Readiness ↔ Internet?",
-         "Tương quan cao gây 'đếm trùng' một chiều thông tin. Khắc phục: PCA gộp nhóm tiêu chí "
-         "trước khi TOPSIS, hoặc dùng CRITIC điều chỉnh trọng số theo tương quan."),
-        ("d) Chọn 3 vùng cho 3 trung tâm AI (QĐ 127/QĐ-TTg)?",
-         "Top-2 theo điểm thường là ĐNB và ĐBSH; vùng thứ ba nên thêm tiêu chí địa-chính trị "
-         "(phân tán rủi ro Bắc-Trung-Nam) → ứng viên hợp lý là BTB-DHTB (Đà Nẵng)."),
-    ])
-
+   
 
 @st.cache_data(show_spinner="Đang chạy NSGA-II…")
 def run_nsga2(beta_flat, e, rho, sig, D0, pop, gen, seed, lam=0.65):
@@ -1081,20 +1005,6 @@ def page_b7(*_):
     alloc = pd.DataFrame(X[best].reshape(6, 4).round(0), index=REGION_SHORT, columns=ITEMS4)
     st.plotly_chart(px.imshow(alloc, text_auto=".0f", aspect="auto",
                               title="Phân bổ của nghiệm thỏa hiệp"), use_container_width=True)
-    policy_box([
-        ("a) Đánh đổi tăng trưởng – bao trùm có rõ không?",
-         "Có — biên Pareto dốc rõ giữa f1 và f2 vì hệ số biên tập trung ở ĐNB/ĐBSH: muốn GDP gain "
-         "cao phải dồn vốn về hai vùng này, lập tức tăng độ lệch phân bổ. Độ dốc lớn phản ánh cơ "
-         "cấu kinh tế hai cực của Việt Nam."),
-        ("b) Trọng số (0,40/0,25/0,20/0,15) có đúng ưu tiên hiện nay?",
-         "Văn kiện ĐH XIII đặt 'phát triển nhanh và bền vững' ngang hàng; cam kết COP26 và QĐ "
-         "127/QĐ-TTg gợi ý nâng trọng số môi trường + an ninh dữ liệu (~0,25/0,20) và hạ tăng "
-         "trưởng xuống ~0,35."),
-        ("c) NSGA-II khác gì LP đơn mục tiêu — có thay được quyết định chính trị?",
-         "NSGA-II không chọn hộ một phương án; nó vẽ *toàn bộ mặt đánh đổi* để cơ quan chính trị "
-         "lựa chọn có thông tin. Bước chọn điểm trên biên Pareto vẫn là quyết định giá trị — đúng "
-         "tinh thần Mục 8.2 của bài báo nguồn."),
-    ])
 
 
 def page_b8(macro, *_):
@@ -1161,20 +1071,6 @@ def page_b8(macro, *_):
     cc[1].metric("Front-load 3 năm đầu", f"{front:.4f}", f"{front-even:+.4f}")
     cc[2].metric("Tối ưu SLSQP", f"{sol['welfare']:.4f}")
     winner = "front-load" if front > even else "trải đều"
-    policy_box([
-        ("a) Quỹ đạo tối ưu front-loaded hay back-loaded?",
-         "Đầu tư K và H thường **front-loaded**: vốn tích lũy sớm sinh lợi kép qua nhiều năm, và H "
-         "vừa vào hàm sản xuất vừa nâng TFP (φ3 lớn nhất). AI khấu hao nhanh (15%) nên dàn đều hơn."),
-        ("b) Tỷ lệ đầu tư AI/H theo thời gian?",
-         "Mô hình giữ I_H đi trước hoặc song song I_AI vì kênh TFP: thiếu H thì đóng góp AI bị "
-         "chiết khấu. Hàm ý: đào tạo nhân lực **đi trước** làn sóng đầu tư AI."),
-        ("c) Nếu ρ = 0,90 thay vì 0,97?",
-         f"Chiết khấu nặng hơn → dồn tiêu dùng về hiện tại, cắt đầu tư dài hạn (nhất là H/R&D). "
-         f"Đây chính là cơ chế khiến chính phủ nhiệm kỳ ngắn 'dưới đầu tư' vào R&D. (Với tham số "
-         f"hiện tại, chiến lược {winner} thắng trong so sánh cố định ở trên.)"),
-    ])
-
-
 def page_b9(*_):
     st.header("Bài 9 — Tác động AI tới thị trường lao động (LP)")
     par = st.data_editor(JOBS_DEFAULT, key="b9_par", use_container_width=True, num_rows="fixed")
@@ -1225,22 +1121,7 @@ def page_b9(*_):
         st.success("Với trần 5%·L_i: bài toán vẫn khả thi — trần chủ yếu bó CN chế biến chế tạo "
                    "và Bán buôn-bán lẻ, buộc giảm x_AI hoặc tăng x_H tương ứng.")
     top_h = out.sort_values("x_H (tỷ)", ascending=False)["Ngành"].iloc[0]
-    policy_box([
-        ("a) Ngành cần đào tạo lại nhiều nhất?",
-         f"**{top_h}** — khớp trực giác: nơi vừa đông lao động vừa rủi ro tự động hóa cao thì một "
-         "đồng x_H 'mở khóa' nhiều đồng x_AI nhất."),
-        ("b) Chiến lược cho Tài chính-Ngân hàng (risk 52%)?",
-         "AI mạnh + đào tạo bắt buộc đi kèm: a1 = 45,8 rất cao nhưng c1·r = 37,7 cũng cao → mỗi tỷ "
-         "AI cần ~1,45 tỷ H (37,7/26) để thỏa năng lực đào tạo lại."),
-        ("c) Có nên đổ x_AI vào Nông-Lâm-Thủy sản?",
-         "Có-nhưng-ít: a1 = 8,5 thấp song c1·r chỉ 0,94 → hệ số ròng dương và 'rẻ' về đào tạo; "
-         "tuy nhiên chi phí cơ hội cao so với CNTT (62,5) nên LP chỉ rót sau khi các ngành hiệu "
-         "suất cao chạm ràng buộc."),
-        ("d) 'Tốc độ tự động hóa không vượt năng lực đào tạo lại' là ràng buộc nào?",
-         "Chính là **Displaced_i ≤ RetrainingCapacity_i** (c1·r·x_AI ≤ d1·x_H). Đề xuất bổ sung: "
-         "trần mất việc theo vùng và NetJob ≥ 0 riêng cho nhóm lao động phổ thông."),
-    ])
-
+  
 
 def page_b10(*_):
     st.header("Bài 10 — Quy hoạch ngẫu nhiên hai giai đoạn (VSS, EVPI)")
@@ -1316,24 +1197,6 @@ def page_b10(*_):
     c1.dataframe(pd.DataFrame({"Minimax regret": x_rb.round(0), "SP": x_sp.round(0)}, index=J))
     c2.metric("Regret tối đa", f"{(th.value() or 0):,.0f}")
     h_more = x_sp[3] > x_ev[3] + 1
-    policy_box([
-        ("a) SP đầu tư H nhiều hơn hay ít hơn lời giải xác định?",
-         (f"Với tham số hiện tại: SP phân bổ H = {x_sp[3]:,.0f} so với EV = {x_ev[3]:,.0f} — "
-          + ("**nhiều hơn**, vì hai cơ chế: (i) y_AI ≤ 0,5·x_H biến H thành 'quyền chọn' mở rộng "
-             "AI giai đoạn 2; (ii) β_H tăng lên 1,10 trong kịch bản khủng hoảng — H là tài sản "
-             "phòng thủ." if h_more else
-             "**bằng nhau** ở cấu hình này vì quyền chọn y_AI ≤ 0,5·x_H chưa đáng giá; tăng "
-             "β_AI(s1) hoặc xác suất s4 trong bảng để thấy SP nghiêng về H như lý thuyết dự đoán "
-             "(β_H = 1,10 ở khủng hoảng là cơ chế phòng thủ)."))),
-        ("b) VSS dương nói lên điều gì?",
-         f"VSS = {VSS:,.0f} tỷ: hoạch định theo tư duy xác suất (thay vì kịch bản trung bình) tạo "
-         "thêm chừng đó giá trị kỳ vọng — bằng chứng định lượng cho việc đưa phân tích kịch bản "
-         "vào quy trình lập kế hoạch 5 năm."),
-        ("c) Bài học COVID-19 / bão Yagi?",
-         "Cả hai cú sốc cho thấy lao động qua đào tạo chuyển đổi việc nhanh hơn — đúng cơ chế "
-         "β_H = 1,10 ở s4. Việt Nam nhiều khả năng đang 'dưới đầu tư' vào nhân lực số xét như một "
-         "**hàng hóa bảo hiểm vĩ mô**."),
-    ])
 
 
 @st.cache_data(show_spinner="Đang huấn luyện Q-learning…")
@@ -1385,18 +1248,6 @@ def page_b11(*_):
     st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
     act_low = ALLOC11[int(np.argmax(Q[env.reset('low')]))][0]
     act_high = ALLOC11[int(np.argmax(Q[env.reset('high')]))][0]
-    policy_box([
-        ("a) Trạng thái xấu (GDP thấp, U cao) → hành động?",
-         f"π* chọn **{act_low}** — thiên về H/cân bằng, đúng logic 'quick win an sinh trước, tăng "
-         "tốc sau': giảm rủi ro thất nghiệp là thành phần phạt nặng thứ hai trong hàm thưởng."),
-        ("b) Trạng thái tốt (GDP cao, AI cao) → hành động?",
-         f"π* chọn **{act_high}** — giai đoạn consolidation: khi AI stock đã cao, phần thưởng biên "
-         "của a3 giảm còn rủi ro mạng (tỷ lệ AI/H) tăng, agent chuyển sang phương án cân bằng hơn."),
-        ("c) Tích hợp π* mà không vi phạm 'AI không thay quyết định chính trị'?",
-         "Dùng π* như **hệ khuyến nghị có giải trình**: công bố Q-values, môi trường huấn luyện và "
-         "hàm thưởng (trọng số w do con người chọn); quyết định cuối thuộc cơ quan dân cử; kiểm "
-         "toán định kỳ sai lệch mô hình so với thực tế."),
-    ])
 
 
 def page_b12(macro, sectors, regions):
