@@ -1341,8 +1341,7 @@ def page_b12(macro, sectors, regions):
             else:
                 st.success(f"**{r['Kịch bản']}**: trong ngưỡng an toàn.")
     st.divider()
-    st.caption("M6 chính là dashboard này (Streamlit, 4 tab). Các deliverable còn lại của Bài 12 "
-               "(báo cáo 15-25 trang, slide, video demo) dựng từ kết quả/biểu đồ ở trên.")
+
 
 
 # =====================================================================================
