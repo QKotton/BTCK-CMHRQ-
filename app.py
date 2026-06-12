@@ -14,9 +14,6 @@ import plotly.graph_objects as go
 import pulp
 from scipy.optimize import linprog, minimize
 
-# =====================================================================================
-# 0. DU LIEU GOC (theo dung de bai) + tu sinh 3 file CSV vao thu muc data/
-# =====================================================================================
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
@@ -548,12 +545,6 @@ def simulate_scenario(shares, years=5, budget_rate=0.30, A0=2.0):
 # UI TUNG BAI
 # =====================================================================================
 
-def policy_box(items):
-    with st.expander("💬 Câu hỏi thảo luận chính sách — gợi ý trả lời"):
-        for q, a in items:
-            st.markdown(f"**{q}**  \n{a}")
-
-
 def page_home(macro, sectors, regions):
     st.title("🇻🇳 AIDEOM-VN — Mô hình ra quyết định trong kỉ nguyên AI")
     st.markdown(
@@ -564,7 +555,7 @@ def page_home(macro, sectors, regions):
     c1.metric("GDP 2025", "12.847,6 nghìn tỷ", "+8,02%")
     c2.metric("Kinh tế số/GDP", "≈19,5%", "+1,2 điểm")
     c3.metric("DN công nghệ số", "80.052", "+6.264")
-    st.subheader("Ba bộ dữ liệu gốc (data/*.csv — đã tự sinh và đọc bằng pd.read_csv)")
+    st.subheader("Ba bộ dữ liệu gốc")
     t1, t2, t3 = st.tabs(["Macro 2020-2025", "10 ngành 2024", "6 vùng 2024"])
     t1.dataframe(macro, use_container_width=True)
     t2.dataframe(sectors, use_container_width=True)
