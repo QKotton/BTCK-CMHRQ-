@@ -1,0 +1,10 @@
+# AIDEOM-VN — môi trường cho Streamlit Community Cloud
+# (KHÔNG đưa torch/stable-baselines3/pyomo vào đây: quá nặng hoặc cần solver hệ thống;
+#  các phần đó nằm trong notebook nộp bài, không chạy trên web)
+streamlit>=1.32
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+plotly>=5.17
+pulp>=2.7
+pymoo>=0.6.1
