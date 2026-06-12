@@ -547,11 +547,6 @@ def simulate_scenario(shares, years=5, budget_rate=0.30, A0=2.0):
 
 def page_home(macro, sectors, regions):
     st.title("🇻🇳 AIDEOM-VN — Mô hình ra quyết định trong kỉ nguyên AI")
-
-    def policy_box(items):
-    with st.expander("💬 Câu hỏi thảo luận chính sách — gợi ý trả lời"):
-        for q, a in items:
-            st.markdown(f"**{q}**  \n{a}")
     st.markdown("Web app tương tác giải **12 bài tập** của bộ đề *Phát triển kinh tế Việt Nam trong kỉ nguyên AI*".)
     
     c1, c2, c3 = st.columns(3)
