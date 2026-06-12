@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 AIDEOM-VN — Bo bai tap "Mo hinh ra quyet dinh: Phat trien kinh te Viet Nam trong ki nguyen AI"
-12 bài tập tương tác trong MỘT file Streamlit duy nhất.
 Mọi bảng số liệu đều chỉnh sửa được (st.data_editor / slider) — kết quả tự tính lại ngay.
-
-Chạy local:   streamlit run app.py
-Deploy:       push lên GitHub -> share.streamlit.io -> chọn repo -> app.py
 """
 
 from pathlib import Path
@@ -1531,8 +1527,7 @@ def main():
     st.sidebar.caption("Mô hình ra quyết định — Kinh tế VN trong kỉ nguyên AI")
     choice = st.sidebar.radio("Chọn bài", [n for n, _ in PAGES_BUILDERS], index=0)
     st.sidebar.divider()
-    st.sidebar.caption("💡 Mọi bảng đều sửa được trực tiếp; kết quả tự tính lại. "
-                       "Dữ liệu gốc: NSO/GSO, MoST, WIPO GII 2025.")
+    st.sidebar.caption("💡 Dữ liệu gốc: NSO/GSO, MoST, WIPO GII 2025.")
     dict(PAGES_BUILDERS)[choice](macro, sectors, regions)
 
 
